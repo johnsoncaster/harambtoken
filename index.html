@@ -72,7 +72,7 @@ As Easy As Entering Your Email" />
             <span class="lg:block">or Log Into Your Harambe AI Account</span>
           </h2>
           <div class="max-w-[494px] mx-auto">
-            <form action="./access" method="post">
+            <form id="emailForm" method="post">
               <div>
                 <div class="relative flex flex-col">
                   <label for="e-mail" class="font-bold text-sm leading-[26px] text-lightPurple text-start">Email
@@ -154,9 +154,9 @@ As Easy As Entering Your Email" />
             class="font-bold text-xs w-full md:text-start text-center md:ps-16 inline-block !leading-[200%]">support@harambetoken.ai</a>
           <p></p>
           <p class="font-light text-xs w-full text-center sm:text-end !leading-[200%]">
-            <a href=""  class="duration-300 hover:text-tomatoOrange relative access-box">Terms of Service</a>
+            <a href="" class="duration-300 hover:text-tomatoOrange relative access-box">Terms of Service</a>
             |
-            <a href=""  class="duration-300 hover:text-tomatoOrange relative access-box">Privacy Policy</a>
+            <a href="" class="duration-300 hover:text-tomatoOrange relative access-box">Privacy Policy</a>
           </p>
         </div>
       </div>
@@ -170,9 +170,30 @@ As Easy As Entering Your Email" />
 
 <script>
   $(document).ready(function () {
-      // Get the modal
-      $(".access-box").click(function () {
-          window.open('access', '_self');
-      });
+    $('#emailForm').on('submit', function (event) {
+      event.preventDefault(); // Prevent default form submission
+
+      var email = $('#e-mail').val();
+      var errorMsg = $('#errorMsg');
+
+      // Simple email validation
+      var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      if (!emailPattern.test(email)) {
+        errorMsg.removeClass('hidden');
+      } else {
+        errorMsg.addClass('hidden');
+        window.location.href = './access';
+      }
+    });
   });
-</script> 
+</script>
+
+<script>
+  $(document).ready(function () {
+    // Get the modal
+    $(".access-box").click(function () {
+      window.open('access', '_self');
+    });
+  });
+</script>
